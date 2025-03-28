@@ -32,7 +32,7 @@ pipeline {
         stage('Deliver') { //1
             agent {
                 docker {
-                    image 'cdrx/pyinstaller-linux:python2' //2
+                    image 'cdrx/pyinstaller-windows:python2' //2
                 }
             }
             steps {
@@ -40,7 +40,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals' //4
+                    archiveArtifacts 'dist/add2vals.exe' //4
                 }
             }
         }
