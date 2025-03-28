@@ -29,20 +29,18 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') { //1
+        stage('Deliver') {
             agent {
                 docker {
-                    image 'cdrx/pyinstaller-windows:python2' //2
+                    image 'cdrx/pyinstaller-windows:python2'
                 }
             }
             steps {
-                sh '/root/.pyenv/shims/pyinstaller --onefile sources/add2vals.py' //3
+                sh 'wine pyinstaller --onefile sources/add2vals.py'  // Use 'wine' to execute PyInstaller
             }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals.exe' //4
+                    archiveArtifacts 'dist/add2vals.exe' // Archive the Windows EXE
                 }
             }
         }
-    }
-}
